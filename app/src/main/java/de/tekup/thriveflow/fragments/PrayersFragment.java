@@ -1,7 +1,5 @@
 package de.tekup.thriveflow.fragments;
 
-import static android.icu.text.DateFormat.getDateInstance;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,17 +10,15 @@ import android.icu.util.Calendar;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,32 +34,55 @@ import java.util.Objects;
 import de.tekup.thriveflow.R;
 import de.tekup.thriveflow.receivers.PrayerAlarmReceiver;
 
-
+/**
+ * PrayersFragment is a Fragment that displays prayer times.
+ * It provides functionality for searching for prayer times by city.
+ * It uses Volley to make a network request to an API and retrieve the prayer times.
+ * It also sets alarms for the prayer times using AlarmManager.
+ */
 public class PrayersFragment extends Fragment {
-
 
     private TextView fajrTime, dhuhrTime, asrTime, maghribTime, ishaTime, sunriseTime, date;
     private EditText searchCity;
-    private TextInputLayout textInputLayout;
 
     String url = "";
 
+    /**
+     * Empty constructor required for Fragment subclasses.
+     */
     public PrayersFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * This method is called when the fragment is first created.
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * This method is called to have the fragment instantiate its user interface view.
+     * It initializes the TextViews and EditText, and sets an OnClickListener to the end icon of the TextInputLayout.
+     * When the end icon is clicked, it gets the location from the EditText, gets the latitude and longitude of the location using Geocoder,
+     * constructs the API url with the latitude and longitude, and calls the getData method with the url and location.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_prayers, container, false);
 
+        // Initialize the TextViews and EditText
         fajrTime = view.findViewById(R.id.textViewFajrTime);
         dhuhrTime = view.findViewById(R.id.textViewDhuhrTime);
         asrTime = view.findViewById(R.id.textViewAsrTime);
@@ -72,40 +91,45 @@ public class PrayersFragment extends Fragment {
         sunriseTime = view.findViewById(R.id.textViewSunriseTime);
         date = view.findViewById(R.id.textViewDate);
         searchCity = view.findViewById(R.id.editTextCity);
-        textInputLayout = view.findViewById(R.id.textInputLayout);
+        TextInputLayout textInputLayout = view.findViewById(R.id.textInputLayout);
 
-
+        // Set an OnClickListener to the end icon of the TextInputLayout
         textInputLayout.setEndIconOnClickListener(v -> {
             String location = searchCity.getText().toString().trim();
-            if (location != null) {
-                //url = "https://muslimsalat.com/" + location + ".json?key=d82948f828527cc80c533f48af05333a";
-                Geocoder geocoder = new Geocoder(getContext());
-                List<Address> addresses;
-                try {
-                    addresses = geocoder.getFromLocationName(location, 5);
-                    if (addresses.size() > 0) {
-                        double latitude = addresses.get(0).getLatitude();
-                        double longitude = addresses.get(0).getLongitude();
-                        url = "https://api.aladhan.com/v1/calendar?latitude=" + latitude + "&longitude=" + longitude;
-                        getData(url, location);
+            Geocoder geocoder = new Geocoder(requireContext());
+            List<Address> addresses;
+            try {
+                addresses = geocoder.getFromLocationName(location, 5);
+                assert addresses != null;
+                if (addresses.size() > 0) {
+                    double latitude = addresses.get(0).getLatitude();
+                    double longitude = addresses.get(0).getLongitude();
+                    url = "https://api.aladhan.com/v1/calendar?latitude=" + latitude + "&longitude=" + longitude;
+                    getData(url, location);
 
-                    } else {
-                        Toast.makeText(getContext(), "Location not found", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d("Error 3", e.getMessage());
+                } else {
+                    Toast.makeText(getContext(), "Location not found", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(getContext(), "Location not found", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("Error 3", Objects.requireNonNull(e.getMessage()));
             }
         });
 
+        // Retrieve the prayer times data
         retrieveData();
 
         return view;
     }
 
+    /**
+     * This method makes a network request to the API with the given url and retrieves the prayer times data.
+     * It creates a JsonObjectRequest with the url, and when the request is successful, it saves the response and location to SharedPreferences,
+     * and calls the retrieveData method.
+     *
+     * @param url      The url for the API request.
+     * @param location The location for the prayer times.
+     */
     private void getData(String url, String location) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             try {
@@ -118,19 +142,22 @@ public class PrayersFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("Error 1", e.getMessage());
+                Log.d("Error 1", Objects.requireNonNull(e.getMessage()));
             }
-        }, error -> {
-            Log.d("Error 2", error.getMessage());
-        });
+        }, error -> Log.d("Error 2", Objects.requireNonNull(error.getMessage())));
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         requestQueue.add(jsonObjectRequest);
 
     }
 
+    /**
+     * This method retrieves the prayer times data from SharedPreferences.
+     * It gets the data and location from SharedPreferences, and if the data is not null, it parses the data into a JSONObject,
+     * gets the timings and date from the JSONObject, sets the timings and date to the TextViews, and calls the setPrayerAlarms method.
+     */
     private void retrieveData() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("PrayerTimes", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("PrayerTimes", Context.MODE_PRIVATE);
         String data = sharedPreferences.getString("data", null);
         String location = sharedPreferences.getString("location", null);
         if (data != null) {
@@ -155,11 +182,20 @@ public class PrayersFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("Error 1", e.getMessage());
+                Log.d("Error 1", Objects.requireNonNull(e.getMessage()));
             }
         }
     }
 
+    /**
+     * This method sets a prayer alarm with the given prayer time and prayer name.
+     * It cleans the prayer time, splits it into hour and minute, sets a calendar with the hour and minute,
+     * creates an Intent with the prayer name, creates a PendingIntent with the Intent, gets the AlarmManager,
+     * and sets a repeating alarm with the AlarmManager, PendingIntent, and calendar time.
+     *
+     * @param prayerTime The time for the prayer.
+     * @param prayerName The name of the prayer.
+     */
     private void setPrayerAlarm(String prayerTime, String prayerName) {
         String cleanPrayerTime = prayerTime.replaceAll("[^\\d:]", "");
 
@@ -185,6 +221,10 @@ public class PrayersFragment extends Fragment {
         Log.d("Alarm", "Alarm set for " + prayerName + " at " + cleanPrayerTime);
     }
 
+    /**
+     * This method sets prayer alarms for each prayer.
+     * It calls the setPrayerAlarm method with the time and name of each prayer.
+     */
     private void setPrayerAlarms() {
         setPrayerAlarm(fajrTime.getText().toString(), "Fajr");
         setPrayerAlarm(dhuhrTime.getText().toString(), "Dhuhr");

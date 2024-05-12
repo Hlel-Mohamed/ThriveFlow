@@ -44,7 +44,7 @@
         android:layout_marginTop="20dp"
         android:drawableEnd="@drawable/baseline_access_time_24"
         android:drawablePadding="10dp"
-        android:text="Time"
+        android:text="Time 00:00"
         android:textAlignment="center"
         android:textColor="?attr/color"
         android:textSize="20sp" />/>

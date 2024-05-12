@@ -22,6 +22,11 @@ import de.tekup.thriveflow.models.ToDoModel;
 import de.tekup.thriveflow.utils.DatabaseHandler;
 import de.tekup.thriveflow.utils.DialogCloseListener;
 
+/**
+ * AddNewTask is a BottomSheetDialogFragment that allows the user to add a new task or update an existing task.
+ * It provides a user interface for entering the task text and a button for saving the task.
+ * It uses a DatabaseHandler for inserting the new task into the database or updating the existing task.
+ */
 public class AddNewTask extends BottomSheetDialogFragment {
 
     public static final String TAG = "ActionBottomDialog";
@@ -31,12 +36,24 @@ public class AddNewTask extends BottomSheetDialogFragment {
     private DatabaseHandler databaseHandler;
 
     private DialogCloseListener dialogCloseListener;
+
+    /**
+     * This method creates a new instance of the AddNewTask fragment.
+     *
+     * @param dialogCloseListener The listener for the dialog close event.
+     * @return A new instance of AddNewTask.
+     */
     public static AddNewTask newInstance(DialogCloseListener dialogCloseListener) {
         AddNewTask addNewTask = new AddNewTask();
         addNewTask.dialogCloseListener = dialogCloseListener;
         return addNewTask;
     }
 
+    /**
+     * This method is called when the fragment is first created.
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +61,32 @@ public class AddNewTask extends BottomSheetDialogFragment {
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
     }
 
+    /**
+     * This method is called to have the fragment instantiate its user interface view.
+     * It inflates the layout for the fragment and sets the soft input mode for the window.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.new_task, container, false);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return view;
     }
 
+    /**
+     * This method is called after onCreateView() when the view hierarchy has been created.
+     * It initializes the EditText, Button, and DatabaseHandler, and sets up the EditText and Button.
+     *
+     * @param view               The view returned by onCreateView().
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     */
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -115,6 +150,12 @@ public class AddNewTask extends BottomSheetDialogFragment {
         });
     }
 
+    /**
+     * This method is called when the dialog is dismissed.
+     * It calls the handleDialogClose method of the dialogCloseListener if it is not null.
+     *
+     * @param dialog The dialog that was dismissed.
+     */
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         if (dialogCloseListener != null) {
