@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TodoListFragment">
+    tools:context=".fragments.TodoListFragment">
 
     <TextView
         android:id="@+id/tasksText"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="Tasks"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"

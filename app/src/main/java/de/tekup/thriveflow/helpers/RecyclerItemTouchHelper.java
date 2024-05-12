@@ -1,4 +1,4 @@
-package de.tekup.thriveflow;
+package de.tekup.thriveflow.helpers;
 
 import android.app.AlertDialog;
 import android.graphics.Canvas;
@@ -12,7 +12,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import de.tekup.thriveflow.adapter.ToDoAdapter;
+import de.tekup.thriveflow.R;
+import de.tekup.thriveflow.adapters.ToDoAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 

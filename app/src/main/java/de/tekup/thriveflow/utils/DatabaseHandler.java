@@ -10,17 +10,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.tekup.thriveflow.model.ToDoModel;
+import de.tekup.thriveflow.models.ToDoModel;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "thrive_flow";
-    private static final String TABLE_NAME = "tasks";
+    private static final String TASKS_TABLE_NAME = "tasks";
     private static final String ID = "id";
     private static final String TASK = "task";
     private static final String STATUS = "status";
-    private static final String CREATE_TASKS_TABLE = "CREATE TABLE " + TABLE_NAME + "("
+    private static final String CREATE_TASKS_TABLE = "CREATE TABLE " + TASKS_TABLE_NAME + "("
             + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + TASK + " TEXT, "
             + STATUS + " INTEGER)";
@@ -32,14 +32,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TASKS_TABLE);
+    public void onCreate(SQLiteDatabase database) {
+        database.execSQL(CREATE_TASKS_TABLE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+        database.execSQL("DROP TABLE IF EXISTS " + TASKS_TABLE_NAME);
+        onCreate(database);
     }
 
     public void openDatabase() {
@@ -50,14 +50,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TASK, task.getTask());
         contentValues.put(STATUS, 0);
-        database.insert(TABLE_NAME, null, contentValues);
+        database.insert(TASKS_TABLE_NAME, null, contentValues);
     }
 
     @SuppressLint("Range")
     public List<ToDoModel> getAllTasks() {
         List<ToDoModel> taskList = new ArrayList<>();
         database.beginTransaction();
-        try (Cursor cursor = database.query(TABLE_NAME, null, null, null, null, null, null)) {
+        try (Cursor cursor = database.query(TASKS_TABLE_NAME, null, null, null, null, null, null)) {
 
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
@@ -80,16 +80,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void updateStatus(int id, int status) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(STATUS, status);
-        database.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{String.valueOf(id)});
+        database.update(TASKS_TABLE_NAME, contentValues, ID + " = ?", new String[]{String.valueOf(id)});
     }
 
     public void updateTask(int id, String task) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TASK, task);
-        database.update(TABLE_NAME, contentValues, ID + " = ?", new String[]{String.valueOf(id)});
+        database.update(TASKS_TABLE_NAME, contentValues, ID + " = ?", new String[]{String.valueOf(id)});
     }
 
     public void deleteTask(int id) {
-        database.delete(TABLE_NAME, ID + " = ?", new String[]{String.valueOf(id)});
+        database.delete(TASKS_TABLE_NAME, ID + " = ?", new String[]{String.valueOf(id)});
     }
 }

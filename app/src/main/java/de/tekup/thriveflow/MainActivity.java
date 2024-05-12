@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import de.tekup.thriveflow.databinding.ActivityMainBinding;
+import de.tekup.thriveflow.fragments.HomeFragment;
+import de.tekup.thriveflow.fragments.PrayersFragment;
+import de.tekup.thriveflow.fragments.TodoListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

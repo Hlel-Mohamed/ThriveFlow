@@ -1,6 +1,5 @@
 package de.tekup.thriveflow;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,8 +17,9 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import de.tekup.thriveflow.model.ToDoModel;
+import de.tekup.thriveflow.models.ToDoModel;
 import de.tekup.thriveflow.utils.DatabaseHandler;
+import de.tekup.thriveflow.utils.DialogCloseListener;
 
 public class AddNewTask extends BottomSheetDialogFragment {
 

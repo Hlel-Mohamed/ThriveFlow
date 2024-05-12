@@ -1,4 +1,4 @@
-package de.tekup.thriveflow;
+package de.tekup.thriveflow.fragments;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -18,8 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.tekup.thriveflow.adapter.ToDoAdapter;
-import de.tekup.thriveflow.model.ToDoModel;
+import de.tekup.thriveflow.AddNewTask;
+import de.tekup.thriveflow.utils.DialogCloseListener;
+import de.tekup.thriveflow.MainActivity;
+import de.tekup.thriveflow.R;
+import de.tekup.thriveflow.helpers.RecyclerItemTouchHelper;
+import de.tekup.thriveflow.adapters.ToDoAdapter;
+import de.tekup.thriveflow.models.ToDoModel;
 import de.tekup.thriveflow.utils.DatabaseHandler;
 
 
@@ -39,7 +44,6 @@ public class TodoListFragment extends Fragment implements DialogCloseListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package de.tekup.thriveflow;
+package de.tekup.thriveflow.utils;
 
 import android.content.DialogInterface;
 

@@ -1,4 +1,4 @@
-package de.tekup.thriveflow.model;
+package de.tekup.thriveflow.models;
 
 public class ToDoModel {
     private int id, status;

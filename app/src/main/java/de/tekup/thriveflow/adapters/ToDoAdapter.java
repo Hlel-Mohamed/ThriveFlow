@@ -1,4 +1,4 @@
-package de.tekup.thriveflow.adapter;
+package de.tekup.thriveflow.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import java.util.List;
 import de.tekup.thriveflow.AddNewTask;
 import de.tekup.thriveflow.MainActivity;
 import de.tekup.thriveflow.R;
-import de.tekup.thriveflow.model.ToDoModel;
+import de.tekup.thriveflow.models.ToDoModel;
 import de.tekup.thriveflow.utils.DatabaseHandler;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder> {
