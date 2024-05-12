@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.tekup.thriveflow.AddNewTask;
 import de.tekup.thriveflow.utils.DialogCloseListener;
 import de.tekup.thriveflow.MainActivity;
 import de.tekup.thriveflow.R;

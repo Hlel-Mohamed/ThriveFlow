@@ -42,9 +42,9 @@ import de.tekup.thriveflow.receivers.PrayerAlarmReceiver;
 public class PrayersFragment extends Fragment {
 
 
-    TextView fajrTime, dhuhrTime, asrTime, maghribTime, ishaTime, sunriseTime, date;
-    EditText searchCity;
-    TextInputLayout textInputLayout;
+    private TextView fajrTime, dhuhrTime, asrTime, maghribTime, ishaTime, sunriseTime, date;
+    private EditText searchCity;
+    private TextInputLayout textInputLayout;
 
     String url = "";
 

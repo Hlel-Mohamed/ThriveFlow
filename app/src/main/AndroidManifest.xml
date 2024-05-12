@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThriveFlow"
         tools:targetApi="31">
+        <activity android:name=".EventEditActivity">
+
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">

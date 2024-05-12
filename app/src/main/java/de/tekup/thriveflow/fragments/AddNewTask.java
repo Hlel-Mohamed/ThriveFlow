@@ -1,4 +1,4 @@
-package de.tekup.thriveflow;
+package de.tekup.thriveflow.fragments;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import de.tekup.thriveflow.R;
 import de.tekup.thriveflow.models.ToDoModel;
 import de.tekup.thriveflow.utils.DatabaseHandler;
 import de.tekup.thriveflow.utils.DialogCloseListener;

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
 import de.tekup.thriveflow.databinding.ActivityMainBinding;
-import de.tekup.thriveflow.fragments.HomeFragment;
+import de.tekup.thriveflow.fragments.CalendarFragment;
 import de.tekup.thriveflow.fragments.PrayersFragment;
 import de.tekup.thriveflow.fragments.TodoListFragment;
 
@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loadFragment(new HomeFragment());
+        loadFragment(new CalendarFragment());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.home) {
-                loadFragment(new HomeFragment());
+            if (item.getItemId() == R.id.calendar) {
+                loadFragment(new CalendarFragment());
             } else if (item.getItemId() == R.id.todoList) {
                 loadFragment(new TodoListFragment());
             } else if (item.getItemId() == R.id.prayers) {

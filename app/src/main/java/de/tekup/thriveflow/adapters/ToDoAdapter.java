@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import de.tekup.thriveflow.AddNewTask;
+import de.tekup.thriveflow.fragments.AddNewTask;
 import de.tekup.thriveflow.MainActivity;
 import de.tekup.thriveflow.R;
 import de.tekup.thriveflow.models.ToDoModel;
