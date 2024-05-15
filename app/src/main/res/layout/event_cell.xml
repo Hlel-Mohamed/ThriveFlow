@@ -12,7 +12,7 @@
         android:layout_marginStart="20dp"
         android:id="@+id/eventCellTV"
         android:textSize="20sp"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorWhiteAndBlack"
         android:text="Event"/>
 
 </LinearLayout>

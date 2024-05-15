@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:text="Name:"
         android:textAlignment="center"
-        android:textColor="?attr/color"
+        android:textColor="?attr/colorBlueAndDarkBlue"
         android:textSize="20sp" />
 
     <EditText
@@ -33,7 +33,7 @@
         android:layout_marginTop="20dp"
         android:text="Date"
         android:textAlignment="center"
-        android:textColor="?attr/color"
+        android:textColor="?attr/colorBlueAndDarkBlue"
         android:textSize="20sp" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:drawablePadding="10dp"
         android:text="Time 00:00"
         android:textAlignment="center"
-        android:textColor="?attr/color"
+        android:textColor="?attr/colorBlueAndDarkBlue"
         android:textSize="20sp" />/>
 
     <Button
@@ -57,7 +57,7 @@
         android:background="@null"
         android:onClick="saveEventAction"
         android:text="Save"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="?attr/colorWhiteAndBlack"
         android:textSize="20sp"
         android:textStyle="bold" />
 

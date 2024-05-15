@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.Objects;
 
 import de.tekup.thriveflow.R;
 import de.tekup.thriveflow.models.ToDoModel;
@@ -75,7 +78,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.new_task, container, false);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return view;
     }
@@ -144,7 +147,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
                     task.setStatus(0);
                     databaseHandler.insertTask(task);
                 }
-                getDialog().dismiss();
+                Objects.requireNonNull(getDialog()).dismiss();
             }
 
         });
@@ -158,9 +161,10 @@ public class AddNewTask extends BottomSheetDialogFragment {
      */
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
-        if (dialogCloseListener != null) {
+        if (dialogCloseListener != null)
             dialogCloseListener.handleDialogClose(dialog);
-        }
+
     }
+
 
 }

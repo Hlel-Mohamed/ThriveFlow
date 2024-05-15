@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +83,7 @@ public class TodoListFragment extends Fragment implements DialogCloseListener {
         // Initialize the RecyclerView and set its layout manager and adapter
         RecyclerView tasksRecyclerView = view.findViewById(R.id.tasksRecyclerView);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        tasksAdapter = new ToDoAdapter(databaseHandler, (MainActivity) getActivity());
+        tasksAdapter = new ToDoAdapter(databaseHandler, this);
         tasksRecyclerView.setAdapter(tasksAdapter);
 
         // Initialize the FloatingActionButton
@@ -114,6 +115,7 @@ public class TodoListFragment extends Fragment implements DialogCloseListener {
     public void handleDialogClose(DialogInterface dialog) {
         taskLists = databaseHandler.getAllTasks();
         Collections.reverse(taskLists);
+        tasksAdapter.clear();
         tasksAdapter.setTaskList(taskLists);
         tasksAdapter.notifyDataSetChanged();
     }

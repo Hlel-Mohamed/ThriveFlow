@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="?attr/colorWhiteAndBlack"
             tool:text="Sample text for tasks" />
 
     </RelativeLayout>

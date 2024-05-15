@@ -19,11 +19,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
-            android:text="&lt;-"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:background="@drawable/baseline_keyboard_arrow_left_24"
+            android:backgroundTint="?attr/colorWhiteAndBlack"
+            />
 
         <TextView
             android:id="@+id/monthYearTV"
@@ -32,7 +30,7 @@
             android:layout_weight="2"
             android:text="Feb 2021"
             android:textAlignment="center"
-            android:textColor="?attr/color"
+            android:textColor="?attr/colorBlueAndDarkBlue"
             android:textSize="20sp" />
 
         <Button
@@ -40,11 +38,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
-            android:text="-&gt;"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:background="@drawable/baseline_keyboard_arrow_right_24"
+            android:backgroundTint="?attr/colorWhiteAndBlack"
+            />
 
     </LinearLayout>
 
@@ -135,7 +131,7 @@
         android:layout_marginBottom="10sp"
         android:background="@null"
         android:text="New Event"
-        android:textColor="?attr/color"
+        android:textColor="?attr/colorBlueAndDarkBlue"
         android:textSize="20sp"
         />
 

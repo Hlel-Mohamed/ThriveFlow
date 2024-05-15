@@ -41,7 +41,7 @@ public class EventEditActivity extends AppCompatActivity {
         eventDateTV.setText("Date: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         eventTimeTV.setText("Time: " + CalendarUtils.formattedTime(time));
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.baseline_access_time_24);
-        eventNameET.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+        eventTimeTV.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
         eventTimeTV.setOnClickListener(v -> showTimePickerDialog());
     }
 

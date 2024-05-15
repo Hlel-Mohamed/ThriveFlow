@@ -1,13 +1,17 @@
 package de.tekup.thriveflow.adapters;
 
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
@@ -67,14 +71,24 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         final LocalDate date = days.get(position);
 
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = holder.dayOfMonth.getContext().getTheme();
+
         holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
 
-        if (date.equals(CalendarUtils.selectedDate))
-            holder.parentView.setBackgroundColor(Color.LTGRAY);
+        if (date.equals(CalendarUtils.selectedDate)) {
+            theme.resolveAttribute(R.attr.colorWhiteAndGray, typedValue, true);
+            ShapeDrawable shapeDrawable = new ShapeDrawable(new OvalShape());
+            shapeDrawable.setIntrinsicHeight(50);
+            shapeDrawable.setIntrinsicWidth(50);
+            shapeDrawable.getPaint().setColor(typedValue.data);
+            holder.parentView.setBackground(shapeDrawable);
+        }
+        if (date.getMonth().equals(CalendarUtils.selectedDate.getMonth())) {
 
-        if (date.getMonth().equals(CalendarUtils.selectedDate.getMonth()))
-            holder.dayOfMonth.setTextColor(ContextCompat.getColor(holder.dayOfMonth.getContext(), R.color.light_blue));
-        else
+            theme.resolveAttribute(R.attr.colorBlueAndDarkBlue, typedValue, true);
+            holder.dayOfMonth.setTextColor(typedValue.data);
+        } else
             holder.dayOfMonth.setTextColor(Color.LTGRAY);
     }
 
